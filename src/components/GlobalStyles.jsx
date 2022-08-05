@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -19,8 +20,8 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(40, 45, 108, 0.049);
-  color: #212121;
+  background-color: #333;
+  color: #fff;
   line-height: 1.5;
   margin: 0;
   overflow-x: hidden;
@@ -56,4 +57,9 @@ img {
   width: 100%;
   height: 100%;
 }
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  padding: 0px 30px;
 `;

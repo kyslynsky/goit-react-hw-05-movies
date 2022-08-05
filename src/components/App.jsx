@@ -1,32 +1,24 @@
+import { Route, Routes } from 'react-router-dom';
+import { lazy } from 'react';
 import { GlobalStyle } from './GlobalStyles';
-import axios from 'axios';
+import { Header } from 'components/Header';
+
+const Home = lazy(() => import('pages/Home'));
 
 export const App = () => {
-  const { REACT_APP_API_KEY } = process.env;
-
-  const resp = async () => {
-    const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/550?api_key=${REACT_APP_API_KEY}`
-    );
-    console.log(response);
-  };
-
-  resp();
-
   return (
     <>
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
-        React homework template
-      </div>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Home />} />
+          <Route path="movies" element={<div>Movies</div>} />
+          <Route
+            path="movies/movies/:id"
+            element={<div>Movie {`id`} info</div>}
+          />
+          <Route path="*" element={<div>Not found</div>} />
+        </Route>
+      </Routes>
       <GlobalStyle />
     </>
   );
