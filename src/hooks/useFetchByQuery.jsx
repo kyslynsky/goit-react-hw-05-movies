@@ -1,24 +1,30 @@
 import { useState, useEffect } from 'react';
-import { getTrendingMovies } from 'services/movies-api';
+import { useSearchParams } from 'react-router-dom';
+import { getMovieBySearchQuery } from 'services/movies-api';
 import { Notify } from 'notiflix';
 import { stopLoader } from 'components/Loader';
 
-export const useFetchTrending = () => {
+export const useFetchByQuery = () => {
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
 
+  const searchQuery = searchParams.get('query') ?? '';
+
   useEffect(() => {
-    getTrendingMovies(page)
+    if (searchQuery === '') return;
+
+    getMovieBySearchQuery(searchQuery)
       .then(data => {
         if (data.length === 0) {
-          Notify.warning('We are sorry! There is no results', {
+          Notify.warning('Sorry! No results mathing your request', {
             clickToClose: true,
           });
+          setMovies([]);
           return;
         }
 
-        setMovies([...data]);
+        setMovies(data);
       })
       .catch(error => {
         Notify.failure(error.message, {
@@ -27,7 +33,7 @@ export const useFetchTrending = () => {
         setError(error.message);
       })
       .finally(stopLoader());
-  }, [page]);
+  }, [searchQuery]);
 
-  return [movies, error];
+  return [movies, error, setSearchParams];
 };

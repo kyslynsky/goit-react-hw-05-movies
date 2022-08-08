@@ -1,20 +1,33 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { startLoader, stopLoader } from 'components/Loader';
 import { Container } from 'components/GlobalStyles';
-import { NavBar, NavItem } from './Header.styled';
+import {
+  HeaderWrapper,
+  NavBar,
+  NavItem,
+  HomeIco,
+  SearchIco,
+} from './Header.styled';
 
 export const Header = () => {
   return (
     <>
-      <header>
+      <HeaderWrapper>
         <Container>
           <NavBar>
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="movies">Movies</NavItem>
+            <NavItem to="/">
+              <HomeIco />
+              Home
+            </NavItem>
+            <NavItem to="movies">
+              <SearchIco />
+              Movies
+            </NavItem>
           </NavBar>
         </Container>
-      </header>
-      <Suspense fallback={<div>Loading...</div>}>
+      </HeaderWrapper>
+      <Suspense fallback={startLoader()}>
         <Outlet />
       </Suspense>
     </>

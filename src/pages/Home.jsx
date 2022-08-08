@@ -3,7 +3,6 @@ import { useFetchTrending } from 'hooks/useFetchTrending';
 
 const Home = () => {
   const [movies] = useFetchTrending();
-  console.log(movies);
 
   return (
     <main>

@@ -1,1 +1,1 @@
-export { default } from './MoviesList.jsx';
+export { default } from './MoviesList';

@@ -60,6 +60,6 @@ img {
 `;
 
 export const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   padding: 0px 30px;
 `;
