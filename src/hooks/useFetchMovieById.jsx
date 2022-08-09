@@ -21,6 +21,7 @@ export const useFetchMovieById = () => {
         }
 
         setMovie(details);
+        stopLoader();
       })
       .catch(error => {
         Notify.failure(error.message, {

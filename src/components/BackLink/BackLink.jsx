@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Container } from 'components/GlobalStyles';
+import { BackBtn, BackIco } from './BackLink.styled';
 
 export const BackLink = ({ to, children }) => {
-  return <Link to={to}>{children}</Link>;
+  return (
+    <Container>
+      <BackBtn to={to}>
+        <BackIco />
+        {children}
+      </BackBtn>
+    </Container>
+  );
 };
 
 BackLink.propTypes = {

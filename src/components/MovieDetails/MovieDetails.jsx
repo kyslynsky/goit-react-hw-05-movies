@@ -1,9 +1,17 @@
 import PropTypes from 'prop-types';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Container } from 'components/GlobalStyles';
+import { startLoader } from 'components/Loader';
 import pic from 'img/no-poster.jpg';
-import { Section } from './MovieDetails.styled';
+import {
+  Section,
+  DecsItem,
+  DescTitle,
+  SectionAdditional,
+  LinkList,
+  LinkItem,
+} from './MovieDetails.styled';
 
 const MovieDetails = ({ movieInfo }) => {
   const {
@@ -37,36 +45,36 @@ const MovieDetails = ({ movieInfo }) => {
             <span> ({releaseYear})</span>
           </h1>
           <ul>
-            <li>
-              <p>Vote Average:</p>
+            <DecsItem>
+              <DescTitle>Vote Average:</DescTitle>
               <p>{vote_average}</p>
-            </li>
-            <li>
-              <p>Genres:</p>
+            </DecsItem>
+            <DecsItem>
+              <DescTitle>Genres:</DescTitle>
               <p>{movieGenres}</p>
-            </li>
-            <li>
-              <p>Overview:</p>
+            </DecsItem>
+            <DecsItem>
+              <DescTitle>Overview:</DescTitle>
               <p>{overview}</p>
-            </li>
+            </DecsItem>
           </ul>
         </div>
       </Section>
 
-      <section>
+      <SectionAdditional>
         <div>
-          <h3>Additional information</h3>
+          <h2>Additional information</h2>
         </div>
-        <ul>
+        <LinkList>
           <li>
-            <Link to="credits">Cast</Link>
+            <LinkItem to="credits">Cast</LinkItem>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <LinkItem to="reviews">Reviews</LinkItem>
           </li>
-        </ul>
-      </section>
-      <Suspense fallback={<div>Loading!</div>}>
+        </LinkList>
+      </SectionAdditional>
+      <Suspense>
         <Outlet />
       </Suspense>
     </Container>

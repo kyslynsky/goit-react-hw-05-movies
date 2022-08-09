@@ -27,7 +27,7 @@ export const Header = () => {
           </NavBar>
         </Container>
       </HeaderWrapper>
-      <Suspense fallback={startLoader()}>
+      <Suspense >
         <Outlet />
       </Suspense>
     </>

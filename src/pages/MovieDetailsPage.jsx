@@ -10,7 +10,7 @@ const MovieDetailsPage = () => {
 
   return (
     <>
-      <BackLink to={backLink}>Back</BackLink>
+      <BackLink to={backLink}>Back to previous</BackLink>
       {movie && <MovieDetails movieInfo={movie} />}
     </>
   );
