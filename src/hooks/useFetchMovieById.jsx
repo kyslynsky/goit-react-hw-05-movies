@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/movies-api';
 import { Notify } from 'notiflix';
-import { stopLoader } from 'components/Loader';
 
 export const useFetchMovieById = () => {
   const { id } = useParams();
@@ -21,15 +20,13 @@ export const useFetchMovieById = () => {
         }
 
         setMovie(details);
-        stopLoader();
       })
       .catch(error => {
         Notify.failure(error.message, {
           clickToClose: true,
         });
         setError(error.message);
-      })
-      .finally(stopLoader());
+      });
   }, [id]);
 
   return [movie, error];

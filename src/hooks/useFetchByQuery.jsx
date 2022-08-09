@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovieBySearchQuery } from 'services/movies-api';
 import { Notify } from 'notiflix';
-import { stopLoader } from 'components/Loader';
 
 export const useFetchByQuery = () => {
   const [movies, setMovies] = useState([]);
@@ -31,8 +30,7 @@ export const useFetchByQuery = () => {
           clickToClose: true,
         });
         setError(error.message);
-      })
-      .finally(stopLoader());
+      });
   }, [searchQuery]);
 
   return [movies, error, setSearchParams];

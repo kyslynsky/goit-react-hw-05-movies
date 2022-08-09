@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Notify } from 'notiflix';
-import { Container } from 'components/GlobalStyles';
 import { BtnIco, SearchForm, Input, SearchBtn } from './SearchBox.styled';
 
 export const SearchBox = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const handleInputChange = e => {
-    setQuery(e.currentTarget.value.toLowerCase().trim());
+    setQuery(e.currentTarget.value.toLowerCase());
   };
 
   const handleSubmit = e => {
@@ -20,12 +19,11 @@ export const SearchBox = ({ onSubmit }) => {
       });
       return;
     }
-    onSubmit(query);
+    onSubmit(query.trim());
     setQuery('');
   };
 
   return (
-    <Container>
       <SearchForm onSubmit={handleSubmit}>
         <Input
           value={query}
@@ -39,7 +37,6 @@ export const SearchBox = ({ onSubmit }) => {
           <BtnIco />
         </SearchBtn>
       </SearchForm>
-    </Container>
   );
 };
 

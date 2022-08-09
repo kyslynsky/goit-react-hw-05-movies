@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Suspense } from 'react';
+import Loader from 'components/Loader/Loader';
 import { Container } from 'components/GlobalStyles';
-import { startLoader } from 'components/Loader';
 import pic from 'img/no-poster.jpg';
 import {
   Section,
@@ -25,6 +25,8 @@ const MovieDetails = ({ movieInfo }) => {
 
   const releaseYear = release_date.slice(0, 4);
   const movieGenres = genres.map(genre => genre.name).join(', ');
+
+  const location = useLocation();
 
   return (
     <Container>
@@ -67,14 +69,18 @@ const MovieDetails = ({ movieInfo }) => {
         </div>
         <LinkList>
           <li>
-            <LinkItem to="credits">Cast</LinkItem>
+            <LinkItem to="credits" state={location.state}>
+              Cast
+            </LinkItem>
           </li>
           <li>
-            <LinkItem to="reviews">Reviews</LinkItem>
+            <LinkItem to="reviews" state={location.state}>
+              Reviews
+            </LinkItem>
           </li>
         </LinkList>
       </SectionAdditional>
-      <Suspense>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </Container>

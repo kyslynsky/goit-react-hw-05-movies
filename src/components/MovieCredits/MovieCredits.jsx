@@ -1,15 +1,17 @@
 import { useFetchCredits } from 'hooks/useFetchCredits';
 import pic from 'img/no-poster.jpg';
-import { CreditsList } from './MovieCredits.styled';
+import { CreditsList, CreditItem } from './MovieCredits.styled';
+import { ErrorBlock } from 'components/Error';
 
 const MovieCredits = () => {
   const [credits, error] = useFetchCredits();
 
   return (
     <section>
+      {error && <ErrorBlock message={error} />}
       <CreditsList>
         {credits?.map(({ id, name, profile_path, character }) => (
-          <li key={id}>
+          <CreditItem key={id}>
             <img
               src={
                 profile_path
@@ -22,7 +24,7 @@ const MovieCredits = () => {
             <p>
               Character: <span>{character}</span>
             </p>
-          </li>
+          </CreditItem>
         ))}
       </CreditsList>
     </section>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from 'services/movies-api';
-import { stopLoader } from 'components/Loader';
 
 export const useFetchReviews = () => {
   let { id } = useParams();
@@ -18,8 +17,9 @@ export const useFetchReviews = () => {
 
         setReviews(data);
       })
-      .catch(error => setError(error.message))
-      .finally(stopLoader());
+      .catch(error => {
+        setError(error.message);
+      });
   }, [id]);
 
   return [reviews, error];

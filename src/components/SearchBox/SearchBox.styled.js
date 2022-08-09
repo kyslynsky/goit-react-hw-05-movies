@@ -10,6 +10,10 @@ export const SearchForm = styled.form`
   background-color: #fff;
   border-radius: 3px;
   overflow: hidden;
+
+  @media screen and (max-width: 767px) {
+    max-width: 100%;
+  }
 `;
 
 export const Input = styled.input`

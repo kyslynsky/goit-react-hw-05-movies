@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getTrendingMovies } from 'services/movies-api';
 import { Notify } from 'notiflix';
-import { stopLoader } from 'components/Loader';
 
 export const useFetchTrending = () => {
   const [movies, setMovies] = useState([]);
@@ -19,6 +18,7 @@ export const useFetchTrending = () => {
         }
 
         setMovies([...data]);
+        setPage(page);
       })
       .catch(error => {
         Notify.failure(error.message, {
@@ -26,8 +26,8 @@ export const useFetchTrending = () => {
         });
         setError(error.message);
       })
-      .finally(stopLoader());
   }, [page]);
 
   return [movies, error];
 };
+// Add return page to handle pagination 

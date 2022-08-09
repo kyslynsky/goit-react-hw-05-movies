@@ -1,13 +1,23 @@
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { TailSpin } from 'react-loader-spinner';
+import styled from 'styled-components';
 
-export function startLoader() {
-  Loading.dots({
-    svgColor: '#2da8d8ff',
-    backgroundColor: 'rgba(0,0,0,0.8)',
-    svgSize: '100px',
-  });
-}
+const Backdrop = styled.div`
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  transform: translate(45%, 50%);
+`;
 
-export function stopLoader() {
-  Loading.remove(300);
-}
+const Loader = () => {
+  return (
+    <Backdrop>
+      <TailSpin color="#2da8d8ff" width={80} heigth={80} />
+    </Backdrop>
+  );
+};
+
+export default Loader;
